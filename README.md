@@ -1,2 +1,2 @@
 # nodejs-course
-https://codewithmosh.com/
+https://codewithmosh.com/ full node.js course
