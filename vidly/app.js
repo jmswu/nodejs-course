@@ -21,6 +21,12 @@ app.get(ApiPath.genres(), (req, res) => {
     res.send(genresDatabase);
 });
 
+app.get(ApiPath.genresID(), (req, res) => {
+    const genre = genresDatabase.find(g => g.id === parseInt(req.params.id));
+    if (!genre) return res.status(404).send('The genre with the givne ID was not found');
+    res.send(genre);
+});
+
 app.post(ApiPath.genres(), (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) return res.status(400).send(error.details[0].message);
