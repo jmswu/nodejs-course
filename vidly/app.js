@@ -33,6 +33,9 @@ app.put('/api/genres/:id', (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) return res.status(404).send(error.details[0].message);
 
+    // Double equals (==) is a comparison operator, which transforms the operands having the same type before comparision
+    // Triple equals (===) is a strict equality comparision operator, which returns false for the values which are not of a
+    // similar type. This operator performs type casting for equality.
     const genre = genresDatabase.find(g => g.id === parseInt(req.params.id));
     if (!genre) return res.status(400).send('The genre with the given ID was not found.');
 
