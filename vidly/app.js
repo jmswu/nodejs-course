@@ -11,14 +11,17 @@ const genresDatabase = [
     { id: 3, name: 'Romance'    },
 ];
 
-const API_ADDR = '/api/genres/';
-const API_ADDR_WITH_ID = API_ADDR + ':id';
+class ApiPath{
+    static base() { return '/api'; }
+    static genres(){ return this.base() + '/genres/'; }
+    static genresID(){ return  this.genres() + ':id';}
+}
 
-app.get(API_ADDR, (req, res) => {
+app.get(ApiPath.genres(), (req, res) => {
     res.send(genresDatabase);
 });
 
-app.post(API_ADDR, (req, res) => {
+app.post(ApiPath.genres(), (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -30,7 +33,7 @@ app.post(API_ADDR, (req, res) => {
     res.send(genre);
 });
 
-app.put(API_ADDR_WITH_ID, (req, res) => {
+app.put(ApiPath.genresID(), (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) return res.status(404).send(error.details[0].message);
 
