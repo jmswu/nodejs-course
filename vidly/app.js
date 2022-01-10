@@ -12,8 +12,22 @@ const genresDatabase = [
     { id: 4, name: 'Romance'    },
 ];
 
+const API_ADDR = '/api/genres/';
+
 app.get('/api/genres/', (req, res) => {
     res.send(genresDatabase);
+});
+
+app.post('/api/genres/', (req, res) => {
+    const { error } = validateGenre(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    const genre = {
+        id: genresDatabase.length + 1,
+        name: req.body.name
+    }
+    genresDatabase.push(genre);
+    res.send(genre);
 });
 
 // beware that the order of this operation
