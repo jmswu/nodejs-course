@@ -1,5 +1,4 @@
 const Express = require('express');
-const { func } = require('joi');
 const app = Express();
 app.use(Express.json());
 
