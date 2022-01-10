@@ -8,17 +8,16 @@ const Joi = require('joi');
 const genresDatabase = [
     { id: 1, name: 'Action'     },
     { id: 2, name: 'SciFi'      },
-    { id: 3, name: 'Drma'       },
-    { id: 4, name: 'Romance'    },
+    { id: 3, name: 'Romance'    },
 ];
 
 const API_ADDR = '/api/genres/';
 
-app.get('/api/genres/', (req, res) => {
+app.get(API_ADDR, (req, res) => {
     res.send(genresDatabase);
 });
 
-app.post('/api/genres/', (req, res) => {
+app.post(API_ADDR, (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
