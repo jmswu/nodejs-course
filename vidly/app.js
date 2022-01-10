@@ -12,6 +12,7 @@ const genresDatabase = [
 ];
 
 const API_ADDR = '/api/genres/';
+const API_ADDR_WITH_ID = API_ADDR + ':id';
 
 app.get(API_ADDR, (req, res) => {
     res.send(genresDatabase);
@@ -29,7 +30,7 @@ app.post(API_ADDR, (req, res) => {
     res.send(genre);
 });
 
-app.put('/api/genres/:id', (req, res) => {
+app.put(API_ADDR_WITH_ID, (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) return res.status(404).send(error.details[0].message);
 
