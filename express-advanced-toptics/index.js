@@ -4,6 +4,7 @@ const app = Express();
 const logger = require('./logger');
 const hemlet = require('helmet');
 const morgan = require('morgan');
+const config = require('config');
 
 app.use(hemlet());
 app.use(Express.json());
@@ -15,6 +16,9 @@ if (app.get('env') === 'development'){
     app.use(morgan('tiny'));
     console.log('Morgan enable...');
 }
+
+console.log(`APP NAME: ${config.get('name')}`);
+console.log(`MAIL SRV: ${config.get('mail.server')}`);
 
 const coursesDatabase = [
     {id: 1, name: 'course-1'},
