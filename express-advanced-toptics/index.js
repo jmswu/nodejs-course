@@ -13,14 +13,18 @@ const coursesDatabase = [
 class ApiPath{
     static base() { return '/api' };
     static courses() { return this.base() + '/courses'; }
-    static courseID() { return this.courses() + ':id'; }
+    static courseID() { return this.courses() + '/:id'; }
 }
 
 app.get(ApiPath.courses(), (req, res) => {
     res.send(coursesDatabase);
 });
 
-
+app.get(ApiPath.courseID(), (req, res) => {
+    const oneCourse = coursesDatabase.find( c => c.id === parseInt(req.params.id));
+    if (!oneCourse) return res.status(404).send('Given course ID was not found');
+    res.send(oneCourse);
+})
 
 function validateCourse(course){
     const shema = Joi.object({name: Joi.string().min(3)});
