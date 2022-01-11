@@ -4,7 +4,8 @@ const app = Express();
 const logger = require('./logger');
 
 app.use(Express.json());
-app.use(Express.urlencoded());
+app.use(Express.urlencoded(extended = true));
+app.use(Express.static('public'));
 app.use(logger.logger);
 
 const coursesDatabase = [
