@@ -6,11 +6,15 @@ const hemlet = require('helmet');
 const morgan = require('morgan');
 
 app.use(hemlet());
-app.use(morgan('tiny'));
 app.use(Express.json());
-app.use(Express.urlencoded(extended = true));
+app.use(Express.urlencoded({extended: true}));
 app.use(Express.static('public'));
 //app.use(logger.logger);
+
+if (app.get('env') === 'development'){
+    app.use(morgan('tiny'));
+    console.log('Morgan enable...');
+}
 
 const coursesDatabase = [
     {id: 1, name: 'course-1'},
