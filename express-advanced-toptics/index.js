@@ -2,10 +2,10 @@ const Joi = require('joi');
 const Express = require('express');
 const app = Express();
 const logger = require('./logger');
+
 app.use(Express.json());
+app.use(Express.urlencoded());
 app.use(logger.logger);
-
-
 
 const coursesDatabase = [
     {id: 1, name: 'course-1'},
