@@ -48,6 +48,15 @@ app.put(ApiPath.courseID(), (req, res) => {
     res.send(courseToUpdate);
 });
 
+app.delete(ApiPath.courseID(), (req, res) => {
+    const courseToDelete = coursesDatabase.find( c => c.id === parseInt(req.params.id));
+    if (!courseToDelete) return res.status(404).send('Given course ID was not found');
+
+    const index = coursesDatabase.indexOf(courseToDelete);
+    coursesDatabase.splice(index, 1);
+    res.send(courseToDelete);
+});
+
 function validateCourse(course){
     const shema = Joi.object({name: Joi.string().min(3).required()});
     return shema.validate({name: course.name});
