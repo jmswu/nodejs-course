@@ -2,11 +2,15 @@ const Joi = require('joi');
 const Express = require('express');
 const app = Express();
 const logger = require('./logger');
+const hemlet = require('helmet');
+const morgan = require('morgan');
 
+app.use(hemlet());
+app.use(morgan('tiny'));
 app.use(Express.json());
 app.use(Express.urlencoded(extended = true));
 app.use(Express.static('public'));
-app.use(logger.logger);
+//app.use(logger.logger);
 
 const coursesDatabase = [
     {id: 1, name: 'course-1'},
