@@ -19,6 +19,7 @@ if (app.get('env') === 'development'){
 
 console.log(`APP NAME: ${config.get('name')}`);
 console.log(`MAIL SRV: ${config.get('mail.server')}`);
+console.log(`MAIL PASS: ${config.get('mail.password')}`);
 
 const coursesDatabase = [
     {id: 1, name: 'course-1'},
