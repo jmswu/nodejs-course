@@ -37,6 +37,17 @@ app.post(ApiPath.courses(), (req, res) => {
     res.send(newCourse);
 });
 
+app.put(ApiPath.courseID(), (req, res) => {
+    const courseToUpdate = coursesDatabase.find( c => c.id === parseInt(req.params.id));
+    if (!courseToUpdate) return res.status(404).send('Given course ID was not found');
+
+    const { error } = validateCourse(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    courseToUpdate.name = req.body.name;
+    res.send(courseToUpdate);
+});
+
 function validateCourse(course){
     const shema = Joi.object({name: Joi.string().min(3).required()});
     return shema.validate({name: course.name});
