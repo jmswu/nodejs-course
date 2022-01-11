@@ -24,10 +24,21 @@ app.get(ApiPath.courseID(), (req, res) => {
     const oneCourse = coursesDatabase.find( c => c.id === parseInt(req.params.id));
     if (!oneCourse) return res.status(404).send('Given course ID was not found');
     res.send(oneCourse);
-})
+});
+
+app.post(ApiPath.courses(), (req, res) => {
+    const { error } = validateCourse(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+    const newCourse = {
+        id: coursesDatabase.length + 1,
+        name: req.body.name
+    };
+    coursesDatabase.push(newCourse);
+    res.send(newCourse);
+});
 
 function validateCourse(course){
-    const shema = Joi.object({name: Joi.string().min(3)});
+    const shema = Joi.object({name: Joi.string().min(3).required()});
     return shema.validate({name: course.name});
 }
 
