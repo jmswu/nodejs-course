@@ -1,8 +1,8 @@
 const express = require('express');
-const route = express();
+const router = express();
 
-route.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.render('index', {title: 'My Express App', message: 'Hello'});
 });
 
-module.exports = route;
+module.exports = router;
