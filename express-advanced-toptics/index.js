@@ -9,7 +9,7 @@ const debug = require('debug')('debug');        // debug package
 
 // import routes
 const courses = require('./routes/courses');    // courses route
-const index = require('./routes/index');        // index route
+const home = require('./routes/home');        // index route
 
 // middlewares
 app.use(hemlet());
@@ -20,7 +20,7 @@ app.use(Express.static('public'));
 
 // using route
 app.use('/api/courses', courses);
-app.use('/', index);
+app.use('/', home);
 
 // template engine
 app.set('view engine', 'pug');
