@@ -13,6 +13,9 @@ app.use(Express.urlencoded({extended: true}));
 app.use(Express.static('public'));
 //app.use(logger.logger);
 
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 if (app.get('env') === 'development'){
     app.use(morgan('tiny'));
     console.log('Morgan enable...');
@@ -34,6 +37,10 @@ class ApiPath{
     static courses() { return this.base() + '/courses'; }
     static courseID() { return this.courses() + '/:id'; }
 }
+
+app.get('/', (req, res) => {
+    res.render('index', {title: 'My Express App', message: 'Hello'});
+});
 
 app.get(ApiPath.courses(), (req, res) => {
     res.send(coursesDatabase);
