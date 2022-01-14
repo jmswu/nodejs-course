@@ -5,6 +5,7 @@ const logger = require('./logger');     // my middleware
 const hemlet = require('helmet');       // set http header
 const morgan = require('morgan');       // 3rd party logger
 const config = require('config');       // environment tool
+const debug = require('debug')('debug');
 
 app.use(hemlet());
 app.use(Express.json());
@@ -15,6 +16,7 @@ app.use(Express.static('public'));
 if (app.get('env') === 'development'){
     app.use(morgan('tiny'));
     console.log('Morgan enable...');
+    debug('Morgan enable');
 }
 
 console.log(`APP NAME: ${config.get('name')}`);
