@@ -1,7 +1,7 @@
 const Joi = require('joi');             // input validation tool
 const Express = require('express');     // simple web server
 const app = Express();          
-const logger = require('./middleware/logger');     // my middleware
+const logger = require('./middleware/logger');  // my middleware
 const hemlet = require('helmet');       // set http header
 const morgan = require('morgan');       // 3rd party logger
 const config = require('config');       // environment tool
@@ -9,7 +9,7 @@ const debug = require('debug')('debug');        // debug package
 
 // import routes
 const courses = require('./routes/courses');    // courses route
-const home = require('./routes/home');        // index route
+const home = require('./routes/home');          // index route
 
 // middlewares
 app.use(hemlet());
