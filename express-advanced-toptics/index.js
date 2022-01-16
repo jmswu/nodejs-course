@@ -1,7 +1,7 @@
 const Joi = require('joi');             // input validation tool
 const Express = require('express');     // simple web server
 const app = Express();          
-const logger = require('./logger');     // my middleware
+const logger = require('./middleware/logger');     // my middleware
 const hemlet = require('helmet');       // set http header
 const morgan = require('morgan');       // 3rd party logger
 const config = require('config');       // environment tool
