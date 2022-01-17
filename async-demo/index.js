@@ -1,10 +1,5 @@
 console.log('Before');
-getUser(1, (user) => {
-    console.log('User: ', user);
-    getRepositories(user, (repos) =>{
-        console.log('Repos:', repos);
-    })
-});
+getUser(1, displayUser);
 console.log('After');
 
 function getUser(id, callback)
@@ -15,6 +10,12 @@ function getUser(id, callback)
     }, 1000);
 }
 
+function displayUser(user)
+{
+    console.log('User: ', user);
+    getRepositories(user, displayRepos);
+}
+
 function getRepositories(userName, callback)
 {
     setTimeout(() => {
@@ -22,4 +23,9 @@ function getRepositories(userName, callback)
         const repos = ['repo1', 'repo2', 'repo3'];
         callback(repos);
     }, 2000);
+}
+
+function displayRepos(repos)
+{
+    console.log('Repos: ', repos);
 }
