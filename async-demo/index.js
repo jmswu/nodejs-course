@@ -1,6 +1,6 @@
 console.log('Before');
 getUser(1, (user) => {
-    console.log("User: ", user);
+    console.log('User: ', user);
     getRepositories(user, (repos) =>{
         console.log('Repos:', repos);
     })
