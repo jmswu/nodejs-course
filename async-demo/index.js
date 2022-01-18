@@ -1,16 +1,13 @@
 console.log('Before');
-const promiseGetUser = getUser(1);
-var promiseGetRepos;
+
+getUser(1)
+    .then(user => getRepositories(user.gitHubName))
+    .then(repo => getCommit(repo[0]))
+    .then(commit => getCommit(commit))
+    .catch(err => console.log('error: ', err.message));
+
+
 console.log('After');
-
-promiseGetUser.then((result) => {
-        console.log('Result: ', result)
-        promiseGetRepos = getRepositories(result.gitHubName);
-        promiseGetRepos.then(result => console.log(result));
-    })
-    .catch(err => console.log('Error: ', err.message));
-
-
 
 function getUser(id)
 {
@@ -24,12 +21,21 @@ function getUser(id)
 
 function getRepositories(userName)
 {
-    const p = new Promise((resolved, reject) => {
+    return new Promise((resolved, reject) => {
         setTimeout(() => {
             console.log('Reading repositories...', userName);
             const repos = ['repo1', 'repo2', 'repo3'];
             resolved(repos);
         }, 2000);
     });
-    return p;
+}
+
+function getCommit(commit)
+{
+    return new Promise((resolved, reject) => {
+        setTimeout(() => {
+            console.log('Reading commits...', commit);
+            resolved(['commit1', 'commit2', 'commit3']);
+        }, 2000);
+    });
 }
