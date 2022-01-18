@@ -7,6 +7,6 @@ const p = new Promise((resolve, reject) => {
     }, 2000);
 });
 
-p
+promiseGetUser
     .then(result => console.log('Result', result))
     .catch(err => console.log('catch Error:', err.message));
