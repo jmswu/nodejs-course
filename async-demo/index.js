@@ -1,31 +1,35 @@
 console.log('Before');
-getUser(1, displayUser);
+const promiseGetUser = getUser(1);
+var promiseGetRepos;
 console.log('After');
 
-function getUser(id, callback)
+promiseGetUser.then((result) => {
+        console.log('Result: ', result)
+        promiseGetRepos = getRepositories(result.gitHubName);
+        promiseGetRepos.then(result => console.log(result));
+    })
+    .catch(err => console.log('Error: ', err.message));
+
+
+
+function getUser(id)
 {
-    setTimeout(() => {
-        console.log('Reading a user from database...');
-        callback( {id: id, gitHubName: 'James'} );
-    }, 1000);
+    return new Promise((resolved, reject) => {
+        setTimeout(() => {
+            console.log('Reading a user from database...');
+            resolved( {id: id, gitHubName: 'James'} );
+        }, 1000);
+    });
 }
 
-function displayUser(user)
+function getRepositories(userName)
 {
-    console.log('User: ', user);
-    getRepositories(user, displayRepos);
-}
-
-function getRepositories(userName, callback)
-{
-    setTimeout(() => {
-        console.log('Reading repositories...', userName);
-        const repos = ['repo1', 'repo2', 'repo3'];
-        callback(repos);
-    }, 2000);
-}
-
-function displayRepos(repos)
-{
-    console.log('Repos: ', repos);
+    const p = new Promise((resolved, reject) => {
+        setTimeout(() => {
+            console.log('Reading repositories...', userName);
+            const repos = ['repo1', 'repo2', 'repo3'];
+            resolved(repos);
+        }, 2000);
+    });
+    return p;
 }
