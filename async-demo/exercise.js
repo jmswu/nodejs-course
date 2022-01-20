@@ -23,6 +23,7 @@ async function notifiCustomer(id)
       const movies = await getTopMovies();
       console.log('Top Movies: ', movies);
       await sendEmail(customer.email, movies);
+      console.log('Email sent...')
     }
   }
   catch(err)
@@ -32,9 +33,9 @@ async function notifiCustomer(id)
 }
 
 function getCustomer(id) {
-  return new Promise((resolved, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolved({ 
+      resolve({ 
         id: 1, 
         name: 'Mosh Hamedani', 
         isGold: true, 
@@ -45,17 +46,17 @@ function getCustomer(id) {
 }
 
 function getTopMovies() {
-  return new Promise((resolved, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolved(['movie1', 'movie2'])
+      resolve(['movie1', 'movie2']);
     }, 4000);
   });
 }
 
 function sendEmail(email, movies) {
-  return new Promise((resolved, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log('Email sent...')
+      resolve();
     }, 4000);
   });
 }
