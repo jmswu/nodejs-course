@@ -16,7 +16,7 @@ notifiCustomer(1);
 async function notifiCustomer(id)
 {
   try{
-    const customer = await getCustomer(1);
+    const customer = await getCustomer(id);
     console.log('Customer: ', customer);
     if (customer.isGold)
     {
