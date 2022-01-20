@@ -17,7 +17,7 @@ async function notifiCustomer(id)
 {
   try{
     const customer = await getCustomer(1);
-    console.log('customer: ', customer);
+    console.log('Customer: ', customer);
     if (customer.isGold)
     {
       const movies = await getTopMovies();
